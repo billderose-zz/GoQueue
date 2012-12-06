@@ -19,6 +19,7 @@ func TestQueue(t *testing.T) {
 			time.Sleep(time.Microsecond)
 		}
 		q.close()
+		done <- true
 	}()
 
 	go func() {
@@ -32,7 +33,9 @@ func TestQueue(t *testing.T) {
 		}
 		done <- true
 	}()
-	<-done
+	for i := range done {
+
+	}
 	if produced != consumed {
 		t.Error("Enqueue not linearizable; test failed")
 	} else {

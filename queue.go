@@ -2,9 +2,6 @@ package queue
 
 type Queue chan int
 
-func newQueue(c int) Queue {
-	return make(Queue, c)
-}
 
 func (q Queue) enqueue(i int) {
 	q <- i

@@ -2,7 +2,6 @@ package queue
 
 type Queue chan int
 
-
 func (q Queue) enqueue(i int) {
 	q <- i
 }

@@ -33,7 +33,7 @@ func TestQueue(t *testing.T) {
 		}
 		done <- true
 	}()
-	for _ = range done {
+	for i := 0; i < 2; i++ {
 		<-done
 	}
 	if produced != consumed {

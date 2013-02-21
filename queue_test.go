@@ -13,6 +13,7 @@ func TestQueue(t *testing.T) {
 	q := newQueue(capacity)
 	var produced, consumed int
 	done := make(chan bool)
+
 	go func() {
 		for j := 0; j < capacity*10; j++ {
 			q.enqueue(rand.Int())

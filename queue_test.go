@@ -1,6 +1,7 @@
 package queue
 
 import (
+	"fmt"
 	"math/rand"
 	"testing"
 	"time"
@@ -9,7 +10,7 @@ import (
 const capacity = 10000
 
 func TestQueue(t *testing.T) {
-	q := make(Queue)
+	q := newQueue(capacity)
 	var produced, consumed int
 	done := make(chan bool)
 	go func() {
@@ -42,12 +43,14 @@ func TestQueue(t *testing.T) {
 		t.Error("Enqueue not linearizable; test failed")
 	} else {
 		t.Log("Test passed")
+		fmt.Println(produced)
+		fmt.Println(consumed)
 	}
 }
 
 func BenchmarkQueue(b *testing.B) {
 	b.StopTimer()
-	var q = make(Queue)
+	var q = newQueue(capacity)
 	b.StartTimer()
 	for j := 0; j < b.N; j++ {
 		q.enqueue(j)

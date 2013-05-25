@@ -16,17 +16,17 @@ func TestQueue(t *testing.T) {
 
 	go func() {
 		for j := 0; j < capacity*10; j++ {
-			q.enqueue(rand.Int())
+			q.Enqueue(rand.Int())
 			produced++
 			time.Sleep(time.Microsecond)
 		}
-		q.close()
+		q.Close()
 		done <- true
 	}()
 
 	go func() {
 		for {
-			if _, err := q.dequeue(); !err {
+			if _, err := q.Dequeue(); !err {
 				break
 			} else {
 				consumed++
@@ -54,7 +54,7 @@ func BenchmarkQueue(b *testing.B) {
 	var q = newQueue(capacity)
 	b.StartTimer()
 	for j := 0; j < b.N; j++ {
-		q.enqueue(j)
-		q.dequeue()
+		q.Enqueue(j)
+		q.Dequeue()
 	}
 }

@@ -2,15 +2,15 @@ package queue
 
 type Queue chan int
 
-func (q Queue) enqueue(i int) {
+func (q Queue) Enqueue(i int) {
 	q <- i
 }
 
-func (q Queue) dequeue() (int, bool) {
+func (q Queue) Dequeue() (int, bool) {
 	val, err := <-q
 	return val, err
 }
 
-func (q Queue) close() {
+func (q Queue) Close() {
 	close(q)
 }
